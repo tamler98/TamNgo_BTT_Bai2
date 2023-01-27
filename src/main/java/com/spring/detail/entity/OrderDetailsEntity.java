@@ -14,13 +14,22 @@ public class OrderDetailsEntity {
     @Column(name = "quantity")
     private int quantity;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn (name = "orderId")
-    private ProductEntity order;
+    @Column(name="name")
+    private String name;
+
+    @Column(name="unitPrice")
+    private double unitPrice;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn (name = "productName")
+    @JoinColumn (name = "orderId")
+    private OrderEntity order;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn (name = "productId")
     private ProductEntity product;
+
+    public OrderDetailsEntity() {
+    }
 
     public int getId() {
         return id;
@@ -38,11 +47,27 @@ public class OrderDetailsEntity {
         this.quantity = quantity;
     }
 
-    public ProductEntity getOrder() {
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public double getUnitPrice() {
+        return unitPrice;
+    }
+
+    public void setUnitPrice(double unitPrice) {
+        this.unitPrice = unitPrice;
+    }
+
+    public OrderEntity getOrder() {
         return order;
     }
 
-    public void setOrder(ProductEntity order) {
+    public void setOrder(OrderEntity order) {
         this.order = order;
     }
 

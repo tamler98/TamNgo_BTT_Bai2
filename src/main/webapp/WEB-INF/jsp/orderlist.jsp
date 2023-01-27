@@ -24,6 +24,7 @@
 
 <body>
     <div class="container" style="margin-top: 10px;">
+        <h2 style="margin-top: 20px; margin-bottom: 20px;">Order Manager</h2>
         <c:if test="${type.equals('orders')}">
             <div class="col-xs-12 col-sm-12 col-md-10">
                 <c:if test="${not empty orderList}">
@@ -45,7 +46,7 @@
                                     <td style="padding-top:15px;">${order.orderDate}</td>
                                     <td>
                                         <button class="btn btn-sm btn-primary"
-                                            onclick="location.href='orderEdit/${order.id}'">View</button>
+                                            onclick="location.href='cart/view_orderId=${order.id}'">View</button>
                                         <a class="btn btn-sm btn-danger" href="#modalDelete${order.id}"
                                             class="trigger-btn" data-toggle="modal" data-id="${order.id}?">Delete</a>
                                     </td>
@@ -62,7 +63,8 @@
                                                         aria-hidden="true">&times;</button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <p>Do you really want to delete this order of "${order.customerName}"?</p>
+                                                    <p>Do you really want to delete this order of
+                                                        "${order.customerName}"?</p>
                                                 </div>
                                                 <div class="modal-footer justify-content-center">
                                                     <button type="button" class="btn btn-secondary"
@@ -75,48 +77,6 @@
                                     </div>
                                 </tr>
                             </c:forEach>
-                            <a class="btn btn-success" style="margin-bottom: 10px; width: 250px; height:40px;;" href="#myModalAddOrder"
-                                class="trigger-btn" data-toggle="modal">Add New Order</a>
-
-                            <div class="modal fade" id="myModalAddOrder">
-                            			<div class="modal-dialog">
-                            				<div class="modal-content">
-                            					<!-- Modal Header -->
-                            					<div class="modal-header">
-                            						<h4 class="modal-title">Add New Order</h4>
-                            							<button type="button" class="btn-close" aria-label="Close" data-dismiss="modal"></button>
-                            					</div>
-                            					<!-- Modal body -->
-                            					<div class="modal-body">
-                            						<form:form action="orderlist/newOrder" method="POST"
-                            							modelAttribute="product">
-                            							<div class="form-group">
-                            								<label class="control-label">Customer (*)</label>
-                            								<input name="customerName" type="text" class="form-control" placeholder="Customer"
-                            									required="true" />
-                            							</div>
-                            							<div class="form-group">
-                            								<label class="control-label">Address (*)</label>
-                            								<input name="customerAddress" type="text" class="form-control" placeholder="Address"
-                            									required="true" />
-                            							</div>
-                            							<div class="form-group">
-                                                            <label class="control-label">OrderDate (*)</label>
-                                                            <input name="orderDate" type="date" class="form-control" value="2023-01-19>" placeholder="OrderDate"
-                                                            required="true"/>
-                                                            </div>
-                            							<br>
-                            							<div class="footer"
-                            								style="display:flex; justify-content: center;">
-                            								<button class="btn btn-primary" type="submit"
-                            									style="width: 100%">Add</button>
-                            							</div>
-                            						</form:form>
-                            					</div>
-                            				</div>
-                            			</div>
-                            		</div>
-
                         </tbody>
                     </table>
                 </c:if>

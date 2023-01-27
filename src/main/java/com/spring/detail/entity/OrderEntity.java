@@ -26,7 +26,7 @@ public class OrderEntity {
     @Column (name="customerAddress")
     private String customerAddress;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderDetailsEntity> orderDetails;
 
     public int getId() {
