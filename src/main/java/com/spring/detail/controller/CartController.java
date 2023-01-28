@@ -117,6 +117,7 @@ public class CartController {
                     orderDetail.setProduct(product);
                     orderDetailRepository.save(orderDetail);
             }
+            cartService.clear();
         }
         System.out.println("Add order Success");
         return "redirect:/";
