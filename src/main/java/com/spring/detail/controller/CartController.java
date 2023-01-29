@@ -36,8 +36,6 @@ public class CartController {
     @Autowired
     private OrderDetailRepository orderDetailRepository;
 
-
-
     @GetMapping()
     public String viewCarts(Model model) {
         double total = cartService.getAmount();
@@ -51,13 +49,10 @@ public class CartController {
     public String saveCarts(@PathVariable Integer id) {
         ProductEntity product = productRepository.findById(id).get();
         CartItem item = new CartItem();
-        item.setProductId(product.getId());
-        item.setName(product.getName());
-        item.setPrice(product.getPrice());
+        item.setProductEntity(product);
         item.setQuantity(1);
 
         cartService.addCart(item);
-        System.out.println("Add Cart Success");
         return "redirect:/cart";
     }
     @GetMapping(value="/clear")
@@ -80,46 +75,31 @@ public class CartController {
 
     @RequestMapping(value = "/checkout", method = POST, produces = "text/plain;charset=UTF-8")
     public String checkOut(OrderEntity order) {
-        System.out.println(order.getCustomerAddress().toString());
         OrderEntity order1 = orderRepository.findByCustomerName(order.getCustomerName());
-
+        OrderDetailsEntity orderDetail = new OrderDetailsEntity();
         if (order1 != null) {
             orderRepository.save(order1);
             Collection<CartItem> cartItems = cartService.getAllCartItem();
             for (CartItem item : cartItems) {
-                ProductEntity product = new ProductEntity();
-                product.setId(item.getProductId());
-                product.setName(item.getName());
-                product.setPrice(item.getPrice());
-
-                OrderDetailsEntity orderDetail = new OrderDetailsEntity();
+                ProductEntity product = productRepository.findById(item.getProductEntity().getId()).get();
+                System.out.println(product.getName());
                 orderDetail.setQuantity(item.getQuantity());
                 orderDetail.setOrder(order1);
-                orderDetail.setName(item.getName());
-                orderDetail.setUnitPrice(item.getPrice());
                 orderDetail.setProduct(product);
-                orderDetailRepository.save(orderDetail);
             }
         }else {
-                orderRepository.save(order);
-                Collection<CartItem> cartItems = cartService.getAllCartItem();
-                for (CartItem item : cartItems) {
-                    ProductEntity product = new ProductEntity();
-                    product.setId(item.getProductId());
-                    product.setName(item.getName());
-                    product.setPrice(item.getPrice());
-
-                    OrderDetailsEntity orderDetail = new OrderDetailsEntity();
-                    orderDetail.setQuantity(item.getQuantity());
-                    orderDetail.setOrder(order);
-                    orderDetail.setName(item.getName());
-                    orderDetail.setUnitPrice(item.getPrice());
-                    orderDetail.setProduct(product);
-                    orderDetailRepository.save(orderDetail);
-            }
+            orderRepository.save(order);
+            Collection<CartItem> cartItems = cartService.getAllCartItem();
+            for (CartItem item : cartItems) {
+                ProductEntity product = productRepository.findById(item.getProductEntity().getId()).get();
+                orderDetail.setQuantity(item.getQuantity());
+                orderDetail.setOrder(order);
+                orderDetail.setProduct(product);
         }
-        System.out.println("Add order Success");
-        return "redirect:/";
+            orderDetailRepository.save(orderDetail);
+            cartService.clear();
+        }
+        return "redirect:/orderlist";
     }
     @GetMapping("/view_orderId={id}")
     public String viewCartOfCustomer(@PathVariable int id, Model model) {

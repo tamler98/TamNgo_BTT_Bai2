@@ -12,36 +12,18 @@ public class CartItem {
 
     // key: product id
     // value: product information
-    private Integer productId;
-    private String name;
-    private double price;
+    private ProductEntity productEntity;
     private int quantity;
 
     public CartItem() {
     }
 
-    public Integer getProductId() {
-        return productId;
+    public ProductEntity getProductEntity() {
+        return productEntity;
     }
 
-    public void setProductId(Integer productId) {
-        this.productId = productId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
+    public void setProductEntity(ProductEntity productEntity) {
+        this.productEntity = productEntity;
     }
 
     public int getQuantity() {

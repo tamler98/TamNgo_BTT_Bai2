@@ -16,10 +16,10 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-            <a style="margin-top:2px;" class="nav-link" href="cart">My Shopping Cart</a>
+            <a style="margin-top:2px;" class="nav-link" href="/TamNgo_BTT_Bai2/cart">My Shopping Cart</a>
         </li>
         <li class="nav-item active">
-            <a style="margin-left: 10px; margin-top:2px;" class="nav-link" href="orderlist">Order List</a>
+            <a style="margin-left: 10px; margin-top:2px;" class="nav-link" href="/TamNgo_BTT_Bai2/orderlist">Order List</a>
         </li>
       </ul>
     </div>

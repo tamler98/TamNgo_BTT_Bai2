@@ -14,12 +14,6 @@ public class OrderDetailsEntity {
     @Column(name = "quantity")
     private int quantity;
 
-    @Column(name="name")
-    private String name;
-
-    @Column(name="unitPrice")
-    private double unitPrice;
-
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn (name = "orderId")
     private OrderEntity order;
@@ -45,22 +39,6 @@ public class OrderDetailsEntity {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public double getUnitPrice() {
-        return unitPrice;
-    }
-
-    public void setUnitPrice(double unitPrice) {
-        this.unitPrice = unitPrice;
     }
 
     public OrderEntity getOrder() {
