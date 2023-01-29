@@ -48,19 +48,19 @@
                             <tbody>
 
                                 <c:forEach var="item" items="${cartItem}">
-                                    <form action="cart/update/${item.productId}" method="post">
-                                        <input type="hidden" name="id" value="${item.productId}" />
+                                    <form action="cart/update/${item.getProductEntity().getId()}" method="post">
+                                        <input type="hidden" name="id" value="${item.productEntity.id}" />
                                         <tr>
-                                            <td>${item.productId }</td>
-                                            <td>${item.name }</td>
-                                            <td>${item.price}</td>
+                                            <td>${item.productEntity.id }</td>
+                                            <td>${item.productEntity.name }</td>
+                                            <td>${item.productEntity.price}</td>
                                             <td><input name="quantity" value="${item.quantity}"
                                                     onblur="this.form.submit()" style="width: 50px;"></td>
-                                            <td>${item.price*item.quantity}</td>
-                                            <td><a class="btn btn-primary btn-sm" href="#delCart${item.productId}"
+                                            <td>${item.productEntity.price * item.quantity}</td>
+                                            <td><a class="btn btn-primary btn-sm" href="#delCart${item.productEntity.id}"
                                                     class="trigger-btn" data-toggle="modal">Remove</a></td>
 
-                                            <div id="delCart${item.productId}" class="modal fade">
+                                            <div id="delCart${item.productEntity.id}" class="modal fade">
                                                 <div class="modal-dialog modal-confirm">
                                                     <div class="modal-content">
                                                         <div class="modal-header flex-column">
@@ -72,13 +72,13 @@
                                                                 aria-hidden="true">&times;</button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <p>Do you want to delete item "${item.name}"?</p>
+                                                            <p>Do you want to delete item "${item.productEntity.name}"?</p>
                                                         </div>
                                                         <div class="modal-footer justify-content-center">
                                                             <button type="button" class="btn btn-secondary"
                                                                 data-dismiss="modal">Cancel</button>
                                                             <button type="button" class="btn btn-danger"
-                                                                onclick="location.href='cart/remove/${item.productId}'">Delete</button>
+                                                                onclick="location.href='cart/remove/${item.productEntity.id}'">Delete</button>
                                                         </div>
                                                     </div>
                                                 </div>
