@@ -59,11 +59,11 @@
                                         <input type="hidden" name="id" value="${detail.id}" />
                                         <tr>
                                             <td>${detail.id }</td>
-                                            <td>${detail.name }</td>
+                                            <td>${detail.product.name }</td>
                                             <td><input name="quantity" value="${detail.quantity}"
                                                     onblur="this.form.submit()" style="width: 50px;"></td>
-                                            <td>${detail.unitPrice }</td>
-                                            <td>${detail.unitPrice*detail.quantity}</td>
+                                            <td>${detail.product.price }</td>
+                                            <td>${detail.product.price*detail.quantity}</td>
                                             <td><a class="btn btn-primary btn-sm" href="#delCart${detail.id}"
                                                     class="trigger-btn" data-toggle="modal">Remove</a></td>
 
@@ -79,7 +79,7 @@
                                                                 aria-hidden="true">&times;</button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <p>Do you want to delete item "${detail.name}"?</p>
+                                                            <p>Do you want to delete item "${detail.product.name}"?</p>
                                                         </div>
                                                         <div class="modal-footer justify-content-center">
                                                             <button type="button" class="btn btn-secondary"
