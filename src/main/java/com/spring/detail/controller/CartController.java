@@ -36,6 +36,8 @@ public class CartController {
     @Autowired
     private OrderDetailRepository orderDetailRepository;
 
+
+
     @GetMapping()
     public String viewCarts(Model model) {
         double total = cartService.getAmount();
@@ -53,6 +55,7 @@ public class CartController {
         item.setQuantity(1);
 
         cartService.addCart(item);
+        System.out.println("Add Cart Success");
         return "redirect:/cart";
     }
     @GetMapping(value="/clear")
@@ -76,29 +79,30 @@ public class CartController {
     @RequestMapping(value = "/checkout", method = POST, produces = "text/plain;charset=UTF-8")
     public String checkOut(OrderEntity order) {
         OrderEntity order1 = orderRepository.findByCustomerName(order.getCustomerName());
-        OrderDetailsEntity orderDetail = new OrderDetailsEntity();
         if (order1 != null) {
             orderRepository.save(order1);
             Collection<CartItem> cartItems = cartService.getAllCartItem();
             for (CartItem item : cartItems) {
+                OrderDetailsEntity orderDetail = new OrderDetailsEntity();
                 ProductEntity product = productRepository.findById(item.getProductEntity().getId()).get();
-                System.out.println(product.getName());
-                orderDetail.setQuantity(item.getQuantity());
-                orderDetail.setOrder(order1);
-                orderDetail.setProduct(product);
+                    orderDetail.setQuantity(item.getQuantity());
+                    orderDetail.setOrder(order1);
+                    orderDetail.setProduct(product);
+                orderDetailRepository.save(orderDetail);
             }
         }else {
             orderRepository.save(order);
             Collection<CartItem> cartItems = cartService.getAllCartItem();
             for (CartItem item : cartItems) {
+                OrderDetailsEntity orderDetail = new OrderDetailsEntity();
                 ProductEntity product = productRepository.findById(item.getProductEntity().getId()).get();
                 orderDetail.setQuantity(item.getQuantity());
                 orderDetail.setOrder(order);
                 orderDetail.setProduct(product);
+                orderDetailRepository.save(orderDetail);
+            }
         }
-            orderDetailRepository.save(orderDetail);
             cartService.clear();
-        }
         return "redirect:/orderlist";
     }
     @GetMapping("/view_orderId={id}")
