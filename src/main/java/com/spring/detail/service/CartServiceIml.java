@@ -17,7 +17,7 @@ public class CartServiceIml implements CartService{
         if (cartItem == null) {
             map.put(item.getProductEntity().getId(), item);
         }else {
-            cartItem.setQuantity(item.getQuantity() + 1);
+            cartItem.setQuantity(cartItem.getQuantity() + 1);
         }
     }
 
