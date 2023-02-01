@@ -9,5 +9,5 @@ import java.util.List;
 
 @Repository
 public interface OrderRepository extends CrudRepository<OrderEntity, Integer> {
-    OrderEntity findByCustomerName(String name);
+    OrderEntity findByCustomerNameAndCustomerAddress(String name, String Address);
 }

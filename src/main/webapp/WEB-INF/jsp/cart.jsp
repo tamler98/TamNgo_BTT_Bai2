@@ -97,6 +97,7 @@
                         <a class="btn btn-primary" href="cart/clear">Clear All
                             Cart</a> <a class="btn btn-primary" href="/TamNgo_BTT_Bai2/">Add
                             more</a>
+                            <a class="btn btn-info" style="color: white;" href="cart/checkout" >Check Out</a>
                         <a class="btn btn-info" style="color: white;" href="#checkOut" class="trigger-btn"
                             data-toggle="modal">Check Out</a>
 
@@ -111,16 +112,22 @@
                                     </div>
                                     <!-- Modal body -->
                                     <div class="modal-body">
-                                        <form:form action="cart/checkout" method="POST" modelAttribute="product">
+                                        <form:form action="cart/checkout" method="POST" modelAttribute="order">
                                             <div class="form-group">
                                                 <label class="control-label">Customer (*)</label>
                                                 <input name="customerName" type="text" class="form-control"
-                                                    placeholder="Customer" required="true" />
+                                                    placeholder="Customer" />
+                                            <small style="color: red;">
+                                                <form:errors path="customerName" class="text-error" />
+                                            </small>
                                             </div>
                                             <div class="form-group">
                                                 <label class="control-label">Address (*)</label>
                                                 <input name="customerAddress" type="text" class="form-control"
                                                     placeholder="Address" required="true" />
+                                                <small style="color: red;">
+                                                    <form:errors path="customerName" class="text-error" />
+                                                </small>
                                             </div>
                                             <div class="form-group">
                                                 <label class="control-label">OrderDate (*)</label>

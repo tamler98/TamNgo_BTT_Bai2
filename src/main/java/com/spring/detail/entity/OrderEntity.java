@@ -3,6 +3,9 @@ package com.spring.detail.entity;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -12,17 +15,16 @@ public class OrderEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     @Column (name = "id")
     private int id;
 
     @Column (name="orderDate")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate orderDate;
-
+    @NotEmpty(message ="Please insert Customer's Name")
     @Column (name="customerName")
     private String customerName;
-
+    @NotEmpty(message ="Please insert Customer's Address")
     @Column (name="customerAddress")
     private String customerAddress;
 
