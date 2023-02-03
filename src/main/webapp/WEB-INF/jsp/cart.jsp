@@ -95,7 +95,7 @@
                         </div>
                         <hr />
                         <a class="btn btn-primary" href="cart/clear">Clear All
-                            Cart</a> <a class="btn btn-primary" href="/TamNgo_BTT_Bai2/">Add
+                            Cart</a> <a class="btn btn-primary" href="/TamNgo_BT2/">Add
                             more</a>
                             <a class="btn btn-info" style="color: white;" href="cart/checkout" >Check Out</a>
                         <a class="btn btn-info" style="color: white;" href="#checkOut" class="trigger-btn"

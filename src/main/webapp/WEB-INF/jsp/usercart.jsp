@@ -37,19 +37,19 @@
         </div>
         <h6 style="opacity: 0.4; color: black; margin-bottom: 20px;">Please Check Carefully Before Complete Your Order!
         </h6>
-        <div class="col-xs-12 col-sm-12 col-md-10">
+        <div class="col-xs-12 col-sm-12 col-md-10" style="width:100%;">
             <c:if test="${not empty orderDetails}">
                 <div class="rows">
-                    <div class="col-sm-9">
+                    <div class="col-sm-9" style="width:100%;">
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
-                                    <th>Id</th>
-                                    <th>Name</th>
-                                    <th>Quantity</th>
-                                    <th>Price</th>
-                                    <th>Amount</>
-                                    <th></th>
+                                    <th style="width:5%;">Id</th>
+                                    <th style="width:30%;">Name</th>
+                                    <th style="width:10%;">Quantity</th>
+                                    <th style="width:20%;">Price</th>
+                                    <th style="width:15%;">Amount</>
+                                    <th style="width:20%;"></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -97,10 +97,19 @@
                             </tbody>
                         </table>
                         <hr />
-                        <a class="btn btn-primary" href="/TamNgo_BTT_Bai2/">Add
-                            more</a>
                     </div>
                 </div>
+                <footer style="width: 100%; display: flex; justify-content: center;">
+                <nav aria-label="Page navigation example">
+                                  <ul class="pagination">
+                                  <li class="page-item"><a class="page-link" href="view_orderId=${customer.id}page${previous}">Previous</a></li>
+                                  <c:forEach var='item' begin='1' end='${countPage}'>
+                                    <li class="page-item"><a class="page-link" href="view_orderId=${customer.id}page${item}"><c:out value='${item}'/></a></li>
+                                    </c:forEach>
+                                   <li class="page-item"><a class="page-link" href="view_orderId=${customer.id}page${next}">Next</a></li>
+                                  </ul>
+                                </nav>
+                                </footer>
             </c:if>
             <c:if test="${orderDetails.size() == 0}">
                 <br>

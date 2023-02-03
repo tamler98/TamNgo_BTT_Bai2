@@ -46,7 +46,7 @@
                                     <td style="padding-top:15px;">${order.orderDate}</td>
                                     <td>
                                         <button class="btn btn-sm btn-primary"
-                                            onclick="location.href='cart/view_orderId=${order.id}'">View</button>
+                                            onclick="location.href='cart/view_orderId=${order.id}page1'">View</button>
                                         <a class="btn btn-sm btn-danger" href="#modalDelete${order.id}"
                                             class="trigger-btn" data-toggle="modal" data-id="${order.id}?">Delete</a>
                                     </td>

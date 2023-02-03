@@ -3,6 +3,7 @@ package com.spring.detail.repository;
 import com.spring.detail.entity.OrderDetailsEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.data.repository.PagingAndSortingRepository;
@@ -15,6 +16,9 @@ public interface OrderDetailRepository extends PagingAndSortingRepository<OrderD
 
     List<OrderDetailsEntity> getOrderDetailByOrderId(int id);
     OrderDetailsEntity getOrderDetailByProductId(int id);
-    Page<OrderDetailsEntity> findAll(Pageable pageable);
+//    Page<OrderDetailsEntity> findAll(Pageable pageable);
+
+    @Query(value = "SELECT * FROM orderdetail where orderId = ?1 LIMIT 10 OFFSET ?2",nativeQuery = true)
+    List<OrderDetailsEntity> getOrderDetailByPage(int orderId,int pageOut);
     }
 

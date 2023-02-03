@@ -121,23 +121,52 @@ public class CartController {
             return "redirect:/orderlist";
         }
         }
-    @GetMapping("/view_orderId={id}")
-    public String viewCartOfCustomer(@PathVariable int id, Model model) {
-        OrderEntity order = orderRepository.findById(id).get();
-        model.addAttribute("customer", order);
-        List<OrderDetailsEntity> orderDetails = orderDetailRepository.getOrderDetailByOrderId(id);
-        model.addAttribute("orderDetails", orderDetails);
-        return "usercart";
-    }
+//    @GetMapping("/view_orderId={id}")
+//    public String viewCartOfCustomer(@PathVariable int id, Model model) {
+//        OrderEntity order = orderRepository.findById(id).get();
+//        model.addAttribute("customer", order);
+//        List<OrderDetailsEntity> orderDetails = orderDetailRepository.getOrderDetailByOrderId(id);
+//        model.addAttribute("orderDetails", orderDetails);
+//        return "page";
+//    }
 
-    @GetMapping("/page")
-    public String userList(Model model, @RequestParam(defaultValue = "0") int page) {
-        Pageable pageable = PageRequest.of(page, 5);
-        Page<OrderDetailsEntity> userPage = orderDetailRepository.findAll(pageable);
-        System.out.println(userPage.getContent().get(1).getQuantity());
-        System.out.println(userPage.getContent().get(1).getProduct().getName());
-        model.addAttribute("userPage", userPage);
-        return "page";
+
+
+    @GetMapping("/view_orderId={orderId}page{pageId}")
+    public String userList(@PathVariable(name="orderId")  int orderId,@PathVariable(name="pageId")  int pageId,Model model) {
+        // Show Customer's information
+        OrderEntity order = orderRepository.findById(orderId).get();
+        model.addAttribute("customer", order);
+
+        //Get list OrderDetail By orderId
+        List<OrderDetailsEntity> listByOrderId = orderDetailRepository.getOrderDetailByOrderId(orderId);
+        //Get mount of Page
+        int mountPage = listByOrderId.size();
+        //Get count of Page return integer
+        int countPage = mountPage/10;
+        //Check and set countPage
+        if (mountPage % 10 != 0) {
+            countPage++;
+        }
+        model.addAttribute("countPage",countPage);
+        //Set OFFSET = PageOut, begin 0
+        int pageOut = (pageId - 1)*10;
+        //Get List OrderDetail by OrderId and set OFFSET = pageOut
+        List<OrderDetailsEntity> listOrderDetailByPage = orderDetailRepository.getOrderDetailByPage(orderId, pageOut);
+        model.addAttribute("orderDetails", listOrderDetailByPage);
+        //Set default previous = 1, set location by pageId
+        int previous =1;
+        if(pageId != 1) {
+            previous = pageId -1;
+        }
+        //Set next Page
+        int next = pageId + 1;
+        if (next > countPage) {
+            next--;
+        }
+        model.addAttribute("previous", previous);
+        model.addAttribute("next", next);
+        return "usercart";
     }
 
     @GetMapping("/removeOrderDetail{id}")

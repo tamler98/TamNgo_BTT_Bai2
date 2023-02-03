@@ -22,7 +22,7 @@
 <body>
     <div class="container" style="margin-top: 20px;">
         <div class="row">
-            <div class="col-xs-12 col-sm-8 col-md-6">
+            <div class="col-xs-12 col-sm-8 col-md-6" style="width:100%;">
                 <form:form action="search" method="get">
                     <div class="input-group">
                         <input name="searchInput" type="text" class="form-control" placeholder="Search by name..." />
@@ -68,15 +68,15 @@
             </div>
         </div>
 
-        <div class="col-xs-12 col-sm-12 col-md-10">
+        <div class="col-xs-12 col-sm-12 col-md-10" style="width:100%;">
             <c:if test="${not empty productList}">
                 <table class="table">
                     <thead class="thead-dark">
                         <tr>
-                            <th scope="col">ID</th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Price</th>
-                            <th scope="col">Action</th>
+                            <th scope="col" style="width:5%;">ID</th>
+                            <th scope="col" style="width:45%;">Name</th>
+                            <th scope="col" style="width:20%;">Price</th>
+                            <th scope="col" style="width:30%;">Action</th>
                         </tr>
                     </thead>
                     <tbody>
